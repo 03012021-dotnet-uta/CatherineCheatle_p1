@@ -1,0 +1,257 @@
+/*Global Section*/
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-family: "Roboto Condensed", sans-serif;
+}
+h1 {
+  font-size: 2.6rem;
+}
+li,
+button,
+label,
+p {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 4.8rem;
+}
+h3 {
+  font-size: 3rem;
+  font-weight: normal;
+}
+h4,
+h5 {
+  font-size: 2.8rem;
+}
+a {
+  color: white;
+  text-decoration: none;
+}
+button {
+  padding: 2rem 6rem;
+  background: #1c253c;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  border-radius: 2rem;
+}
+
+/*Main Header Section*/
+.main-header {
+  background: #1c253c;
+  color: white;
+}
+nav {
+  display: flex;
+  width: 90%;
+  margin: auto;
+  padding: 2rem;
+  min-height: 10vh;
+  align-items: center;
+  flex-wrap: wrap;
+}
+nav ul {
+  display: flex;
+  flex: 1 1 40rem;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+}
+#logo {
+  flex: 2 1 40rem;
+}
+
+/*Landing Page Main Body Section*/
+.main-info {
+  min-height: 90vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), transparent),
+    url("img/dan-cristian-padure-EpNlkyXiiPs-unsplash.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.main-info h3 {
+  padding: 5rem;
+}
+
+/*Company Footer Section*/
+footer {
+  background-color: #281c3c;
+  color: white;
+  padding-bottom: 1rem;
+}
+.footer-container {
+  width: 90%;
+  height: 40vh;
+  background-color: #281c3c;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.footer-col {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-top: 4rem;
+}
+.footer-col h4 {
+  margin-bottom: 2rem;
+}
+.footer-col a {
+  color: white;
+  margin-bottom: 0.5rem;
+}
+.footer-col a:hover {
+  color: #7649fe;
+  transition: 0.3s ease-out;
+  padding-left: 0.5rem;
+}
+.footer-col ul {
+  list-style: none;
+}
+.socialMedia {
+  align-items: center;
+}
+
+/*Login section*/
+#main-login {
+  min-height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), transparent);
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.form-wrapper {
+  background: rgba(19, 28, 39, 0.8);
+  width: 60%;
+  color: white;
+  border-radius: 20px;
+}
+.form-head {
+  text-align: center;
+  padding: 4rem;
+}
+.password-form,
+.email-form {
+  padding: 3rem;
+  text-align: center;
+}
+.form-wrapper label {
+  margin: 0rem 3rem;
+}
+.form-wrapper button {
+  width: 100%;
+  padding: 2rem;
+  margin-top: 8rem;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.form-wrapper input {
+  padding: 1rem 3rem;
+}
+.form-reponse {
+  padding-top: 2rem;
+  font-size: 2rem;
+}
+
+/*Menu Section*/
+.wrapper {
+  display: flex;
+  width: 70%;
+  justify-content: space-around;
+}
+.card {
+  width: 28rem;
+  height: 36rem;
+  padding: 2rem 1rem;
+  background: white;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.7);
+  transition: 0.5s ease-in-out;
+}
+.card:hover {
+  transform: translateY(2rem);
+}
+.card:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 176, 155, 0.5),
+    rgba(150, 201, 61, 1)
+  );
+  z-index: 2;
+  transition: 0.5s all;
+  opacity: 0;
+}
+.card:hover:before {
+  opacity: 1;
+}
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.card .info {
+  position: relative;
+  z-index: 3;
+  color: white;
+  opacity: 0;
+  transform: translateY(3rem);
+  transition: 0.5s all;
+}
+.card:hover .info {
+  opacity: 1;
+  transform: translateY(0px);
+}
+.card .info h2 {
+  margin: 0;
+}
+.card .info p {
+  letter-spacing: 1px;
+  font-size: 15px;
+  margin-top: 8px;
+  margin-bottom: 20px;
+}
+.card .info .btn {
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  background: rgb(172, 240, 247);
+  color: black;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.4s ease-in-out;
+  border-radius: 25px;
+}
+.card .info .btn:hover {
+  box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.7);
+}
