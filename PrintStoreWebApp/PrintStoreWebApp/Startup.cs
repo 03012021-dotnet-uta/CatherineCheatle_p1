@@ -31,7 +31,7 @@ namespace PrintStoreWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             //Set up connection string for connecting to database
-            string connectionString = Configuration.GetConnectionString("printDb");
+            string connectionString = Configuration.GetConnectionString("PrintConnection");
 
             // add the db context
             services.AddDbContext<PrintStoreContext>(options =>
@@ -64,13 +64,16 @@ namespace PrintStoreWebApp
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PrintStoreWebApp v1"));
             }
 
+            // allows to use the static JS pages
             app.UseStatusCodePages();
 
             app.UseHttpsRedirection();
 
+            // use this to  redirect to the index HTML for any random path
             app.UseRewriter(new RewriteOptions()
                 .AddRedirect("^$", "index.html"));
 
+            // use the .js static files (find out what 'static' means)
             app.UseStaticFiles();
 
             app.UseRouting();

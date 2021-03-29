@@ -1,7 +1,7 @@
 // get login form and login response
 const loginForm = document.getElementById("login-form");
-const loginReponse = document.getElementsByClassName("form-response");
-
+const loginReponse = document.getElementById("form-reponse");
+console.log(loginReponse.innerHTML);
 //add event listner for form submit
 loginForm.addEventListener('submit', (event)=> {
     event.preventDefault();
@@ -14,7 +14,7 @@ loginForm.addEventListener('submit', (event)=> {
     console.log(loginData);
 
     //fetch api
-    fetch('api/printstore', {
+    fetch('api/customer', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -30,7 +30,7 @@ loginForm.addEventListener('submit', (event)=> {
             return response.json();
         })
         .then((jsonResponse) => {
-        responseDiv[0].textContent = jsonResponse.CustomerEmail + ' ' + jsonResponse.CustomerPassword;
+        loginReponse.innerHTML = jsonResponse.CustomerEmail + ' ' + jsonResponse.CustomerPassword;
         console.log(jsonResponse);
         }
         )
