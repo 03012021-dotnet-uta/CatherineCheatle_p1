@@ -24,7 +24,6 @@ namespace Repository
             {
                 CustomerId = 0,
                 CustomerEmail = "lilyjames@gmail.com",
-                CustomerPassword = "12345vsg"
             };
             return user1;
         }
