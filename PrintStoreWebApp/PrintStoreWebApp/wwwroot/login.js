@@ -16,26 +16,24 @@ loginForm.addEventListener('submit', (event)=> {
     console.log(loginData);
     console.log("Customer email: " + loginData.CustomerEmail);
 
-    //fetch api
     fetch('api/customer', {
         method: 'POST',
         headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+          'Accept': 'application/json',
+          'Content-Type':'application/json'
         },
         body:JSON.stringify(loginData)
         })
         .then(response => {
-        if (!response.ok) {
+          if (!response.ok) {
             throw new Error(`Network response was not ok (${response.status})`);
-        }
-        else       // When the page is loaded convert it to text
+          }
+          else       // When the page is loaded convert it to text
             return response.json();
         })
         .then((jsonResponse) => {
-        loginReponse.innerHTML = jsonResponse.CustomerEmail;
-        console.log(jsonResponse.CustomerPassword);
-        console.log(jsonResponse);
+            loginReponse.textContent = jsonResponse.customerEmail + ' login successful';
+          console.log(jsonResponse);
         }
         )
         .catch(function(err) {  
