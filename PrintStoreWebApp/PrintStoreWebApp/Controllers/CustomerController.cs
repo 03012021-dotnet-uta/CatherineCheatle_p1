@@ -35,7 +35,7 @@ namespace PrintStoreWebApp.Controllers
         // [Route("/postrequest")]
         public Customer Post([FromBody] Customer obj)
         {
-            Console.WriteLine($"YAY! we made it to the C# side with {obj.CustomerEmail}, {obj.CustomerPassword}. ");
+            Console.WriteLine($"YAY! we made it to the C# side with {obj.CustomerEmail}, {obj.CustomerPasswordSalt}. ");
             //call a method in the business logic layer.
             //the business logic layer implements business requirements. Thisi s where the majority of 
             // the data manipulation will be.
