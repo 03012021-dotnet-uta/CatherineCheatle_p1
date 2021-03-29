@@ -1,7 +1,9 @@
 // get login form and login response
 const loginForm = document.getElementById("login-form");
-const loginReponse = document.getElementById("form-reponse");
+const loginReponse = document.getElementById("form-response");
+
 console.log(loginReponse.innerHTML);
+
 //add event listner for form submit
 loginForm.addEventListener('submit', (event)=> {
     event.preventDefault();
@@ -12,6 +14,7 @@ loginForm.addEventListener('submit', (event)=> {
         CustomerPassword: loginForm.password.value.trim()
     }
     console.log(loginData);
+    console.log("Customer email: " + loginData.CustomerEmail);
 
     //fetch api
     fetch('api/customer', {
@@ -30,7 +33,8 @@ loginForm.addEventListener('submit', (event)=> {
             return response.json();
         })
         .then((jsonResponse) => {
-        loginReponse.innerHTML = jsonResponse.CustomerEmail + ' ' + jsonResponse.CustomerPassword;
+        loginReponse.innerHTML = jsonResponse.CustomerEmail;
+        console.log(jsonResponse.CustomerPassword);
         console.log(jsonResponse);
         }
         )
