@@ -60,6 +60,12 @@ namespace Repository
             _context.SaveChanges();// save the change.
             return _context.Customers.FirstOrDefault(p => p.CustomerId == newCustomer.CustomerId);// default is null
         }
+
+        public Customer GetCustomerByUsername(string username)
+        {
+            Customer existingCustomer = _context.Customers.FirstOrDefault(c => c.CustomerEmail == username);
+            return existingCustomer;
+        }
         
     }//end of class
 }//end of namespace

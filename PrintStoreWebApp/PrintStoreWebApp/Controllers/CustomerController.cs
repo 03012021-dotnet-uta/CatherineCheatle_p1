@@ -1,13 +1,10 @@
 using System;
-using System.Collections.Generic;
 using BusinessLogic;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Models;
 
-namespace PrintStoreWebApp.Controllers
+namespace CustomerController
 {
-
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase
@@ -18,37 +15,15 @@ namespace PrintStoreWebApp.Controllers
             _business = business;
         }
 
-        //GET: api/CustomerController
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "Firstname", "LastName" };
-        }
-
-        //GET: api/CustomerController/{id}
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<CustomerController>
-        [HttpPost("login")]
-        // [Route("/postrequest")]
-        public Customer Post([FromBody] Customer obj)
-        {
-            Console.WriteLine($"YAY! we made it to the C# side with {obj.CustomerEmail}, {obj.CustomerPasswordSalt}. ");
-            //call a method in the business logic layer.
-            //the business logic layer implements business requirements. Thisi s where the majority of 
-            // the data manipulation will be.
-            Customer obj1 = _business.Login(obj);
-
-            return obj1;
-        }
-
+        /// <summary>
+        /// Controller route that takes in register request from sign up page
+        /// </summary>
+        /// <param name="rawcustomer"></param>
+        /// <returns></returns>
         [HttpPost("register")]
         public ActionResult<Customer> Register(RawCustomer rawcustomer)
         {
+            Console.WriteLine("Customer name " + rawcustomer.CustomerFName);
             Customer customer = new Customer();
             if (!ModelState.IsValid)// did the conversion from JS to C# work?
             {
@@ -56,11 +31,14 @@ namespace PrintStoreWebApp.Controllers
             }
             else
             {
-                Console.WriteLine($"{rawcustomer.CustomerFName}, {rawcustomer.CustomerLName}");
-                System.Console.WriteLine("Made it to Controller with raw customer " + rawcustomer.CustomerFName);
+                Console.WriteLine("Raw customer fname " + rawcustomer.CustomerFName);
+                Console.WriteLine("Raw customer lname" + rawcustomer.CustomerLName);
+                Console.WriteLine("Raw customer email" + rawcustomer.CustomerEmail);
+                Console.WriteLine("Raw customer pw" + rawcustomer.CustomerPassword);
                 customer = _business.Register(rawcustomer);
             }
 
+            //check if person is null!!!
             if (customer == null)
             {
                 return StatusCode(409, "We're sorry, your new user was not successfully saved or a user of that username already exists.");
@@ -70,16 +48,34 @@ namespace PrintStoreWebApp.Controllers
             return customer;
         }
 
-        // PUT api/<CustomerController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        /// <summary>
+        /// Controller route which will take a user's sign information and
+        /// check if username and password are a match in the database
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        [HttpGet("login/{username}/{password}")]
+        public ActionResult<Customer> Login(string username, string password)
         {
+            Customer customer = new Customer();
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400, "That was a failue of modelbinding");
+            }
+            else
+            {
+                customer = _business.Login(username, password);
+            }
+
+            //check if person is null!!!
+            if (customer == null)
+            {
+                return StatusCode(409, "We're sorry, your username was not found.");
+            }
+            return customer;
         }
 
-        // DELETE api/<CustomerController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-    }
-}
+
+    }//end of class
+}//end of namespace

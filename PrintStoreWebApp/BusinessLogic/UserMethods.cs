@@ -20,23 +20,48 @@ namespace BusinessLogic
         /// <param name="user"></param>
         /// <returns></returns>
 
-        public Customer Login(Customer user)
+        public Customer Login(string username, string password)
         {
-            //call method in repo to query db
-            //if user exists then log in if creditials are good
-            //otherwise return empty user
-            Customer userReturned = _repolayer.Login(user);
+            //Check if user exists
+            if (!_repolayer.UserExist(username))
+            {
+                return null;
+            }
+            else
+            {
+                //get matching user with username
+                Customer existingCustomer = _repolayer.GetCustomerByUsername(username);
 
-            //if user exists and password check passes
-            // if()
-            // {
-            //     Console.write("Welcome");
-            // }
+                // hash password with key from user
+                byte[] hash = mapper.HashTheUsername(password, existingCustomer.CustomerPasswordSalt);
 
-            //if user doesn't exist or if password doesnt match
+                // compare hashes, if they match return the user
+                if (CompareTwoHashes(existingCustomer.CustomerPasswordHash, hash))
+                {
+                    return existingCustomer;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
 
-
-            return userReturned;
+        private bool CompareTwoHashes(byte[] arr1, byte[] arr2)
+        {
+            if (arr1.Length != arr2.Length)
+            {
+                return false;
+            }
+            //compare the hash of the inputted password and the found user
+            for (int i = 0; i < arr1.Length; i++)
+            {
+                if (arr1[i] != arr2[i])
+                {
+                    return false;
+                } // Unauthorized("Invalid Password");
+            }
+            return true;
         }
 
         /// <summary>

@@ -26,5 +26,20 @@ namespace BusinessLogic
                 return user;
             }
         }
+
+        /// <summary>
+        /// This method with take user's entered password and hash the password
+        /// to later be checked against password stored in the database
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static byte[] HashTheUsername(string password, byte[] key)
+        {
+            using HMACSHA512 hmac = new HMACSHA512(key: key);
+
+            var hashedPassword = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+            return hashedPassword;
+        }
     }
 }

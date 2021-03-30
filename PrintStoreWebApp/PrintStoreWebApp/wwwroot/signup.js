@@ -6,11 +6,12 @@ registerForm.addEventListener('submit', (e) => {
 
   // grab the data and create an object to send as part of the body of my fetch()
   const userData = {
-    fname: registerForm.fname.value,
-    lname: registerForm.lname.value,
-    username: registerForm.email.value,
-    password: registerForm.password.value,
+    CustomerFName: registerForm.fname.value.trim(),
+    CustomerLName: registerForm.lname.value.trim(),
+    CustomerEmail: registerForm.email.value.trim(),
+    CustomerPassword: registerForm.password.value.trim(),
   }
+  console.log(userData);
 
   fetch('api/customer/register', {
     method: 'POST',
@@ -34,10 +35,10 @@ registerForm.addEventListener('submit', (e) => {
     })
     .then(res => {
       //save the personId to localStorage
-      localStorage.setItem('personId', res.personId);// this is available to the whole browser
-      sessionStorage.setItem('personId', res.personId);// this is ony vailable to the certain window tab.
+      localStorage.setItem('personId', res.customerId);// this is available to the whole browser
+      sessionStorage.setItem('personId', res.customerId);// this is ony vailable to the certain window tab.
       //switch the screen
-      location = 'personmenu.html';// 
+      location = 'index.html';// 
     })
     .catch(function(err) {  
         console.log('Failed to fetch page: ', err);  
