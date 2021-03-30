@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Models.Abstracts
+namespace Models
 {
-    public class AStore
+    public class Store
     {
         [Key]
         public int StoreID { get; set; }
@@ -12,6 +12,11 @@ namespace Models.Abstracts
         public string StoreCity { get; set; }
         public string StoreState { get; set; }
         public int StoreZip { get; set; }
+
+        //Ef relationship with store
         public ICollection<Order> Orders { get; set; }
+
+        //Ef relationship with inventory
+        public ICollection<Inventory> Inventories {get; set;}
     }
 }

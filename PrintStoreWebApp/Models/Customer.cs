@@ -19,6 +19,8 @@ namespace Models
         public string CustomerState { get; set; }
         public int CustomerZip { get; set; }
         public string CustomerPhone { get; set; }
+
+        //Ef relation with order table
         public ICollection<Order> Orders { get; set; }
     }
 }

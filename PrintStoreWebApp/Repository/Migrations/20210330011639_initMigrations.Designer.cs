@@ -10,8 +10,8 @@ using Repository;
 namespace Repository.Migrations
 {
     [DbContext(typeof(PrintStoreContext))]
-    [Migration("20210329211120_addedMoreModels")]
-    partial class addedMoreModels
+    [Migration("20210330011639_initMigrations")]
+    partial class initMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,63 +20,6 @@ namespace Repository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Models.Abstracts.APrint", b =>
-                {
-                    b.Property<int>("PrintID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ArtistFName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ArtistLName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PrintDecription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PrintImage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("PrintPrice")
-                        .HasColumnType("float");
-
-                    b.Property<string>("PrintTitle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PrintID");
-
-                    b.ToTable("Prints");
-                });
-
-            modelBuilder.Entity("Models.Abstracts.AStore", b =>
-                {
-                    b.Property<int>("StoreID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("StoreCity")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StoreName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StoreState")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StoreStreet")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StoreZip")
-                        .HasColumnType("int");
-
-                    b.HasKey("StoreID");
-
-                    b.ToTable("Stores");
-                });
 
             modelBuilder.Entity("Models.Customer", b =>
                 {
@@ -135,6 +78,8 @@ namespace Repository.Migrations
 
                     b.HasKey("StoreId", "PrintId");
 
+                    b.HasIndex("PrintId");
+
                     b.ToTable("Inventories");
                 });
 
@@ -144,9 +89,6 @@ namespace Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("AStoreStoreID")
-                        .HasColumnType("int");
 
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
@@ -171,9 +113,9 @@ namespace Repository.Migrations
 
                     b.HasKey("OrdersId");
 
-                    b.HasIndex("AStoreStoreID");
-
                     b.HasIndex("CustomerId");
+
+                    b.HasIndex("StoreId");
 
                     b.ToTable("Orders");
                 });
@@ -181,9 +123,7 @@ namespace Repository.Migrations
             modelBuilder.Entity("Models.Orderline", b =>
                 {
                     b.Property<int>("OrderNumId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<int>("PrintId")
                         .HasColumnType("int");
@@ -191,31 +131,148 @@ namespace Repository.Migrations
                     b.Property<int>("PrintQty")
                         .HasColumnType("int");
 
-                    b.HasKey("OrderNumId");
+                    b.HasKey("OrderNumId", "PrintId");
+
+                    b.HasIndex("PrintId");
 
                     b.ToTable("Orderline");
                 });
 
+            modelBuilder.Entity("Models.Print", b =>
+                {
+                    b.Property<int>("PrintID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ArtistFName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ArtistLName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PrintDecription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PrintImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("PrintPrice")
+                        .HasColumnType("float");
+
+                    b.Property<string>("PrintTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PrintID");
+
+                    b.ToTable("Prints");
+                });
+
+            modelBuilder.Entity("Models.Store", b =>
+                {
+                    b.Property<int>("StoreID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("StoreCity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StoreName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StoreState")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StoreStreet")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StoreZip")
+                        .HasColumnType("int");
+
+                    b.HasKey("StoreID");
+
+                    b.ToTable("Stores");
+                });
+
+            modelBuilder.Entity("Models.Inventory", b =>
+                {
+                    b.HasOne("Models.Print", "Print")
+                        .WithMany("Inventories")
+                        .HasForeignKey("PrintId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.Store", "Store")
+                        .WithMany("Inventories")
+                        .HasForeignKey("StoreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Print");
+
+                    b.Navigation("Store");
+                });
+
             modelBuilder.Entity("Models.Order", b =>
                 {
-                    b.HasOne("Models.Abstracts.AStore", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("AStoreStoreID");
-
-                    b.HasOne("Models.Customer", null)
+                    b.HasOne("Models.Customer", "customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Models.Store", "Store")
+                        .WithMany("Orders")
+                        .HasForeignKey("StoreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("customer");
+
+                    b.Navigation("Store");
                 });
 
-            modelBuilder.Entity("Models.Abstracts.AStore", b =>
+            modelBuilder.Entity("Models.Orderline", b =>
                 {
-                    b.Navigation("Orders");
+                    b.HasOne("Models.Order", "Order")
+                        .WithMany("Orderlines")
+                        .HasForeignKey("OrderNumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.Print", "Print")
+                        .WithMany("Orderlines")
+                        .HasForeignKey("PrintId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Print");
                 });
 
             modelBuilder.Entity("Models.Customer", b =>
                 {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("Models.Order", b =>
+                {
+                    b.Navigation("Orderlines");
+                });
+
+            modelBuilder.Entity("Models.Print", b =>
+                {
+                    b.Navigation("Inventories");
+
+                    b.Navigation("Orderlines");
+                });
+
+            modelBuilder.Entity("Models.Store", b =>
+                {
+                    b.Navigation("Inventories");
+
                     b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618

@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Models.Abstracts
+namespace Models
 {
-    public class APrint
+    public class Print
     {
         [Key]
         public int PrintID { get; set; }
@@ -12,5 +13,11 @@ namespace Models.Abstracts
         public double PrintPrice { get; set; }
         public string PrintImage { get; set; }
         public string PrintDecription { get; set; }
+
+        //Ef relationship with inventory
+        public ICollection<Inventory> Inventories {get; set;}
+
+        //Ef relationship with orderline
+        public ICollection<Orderline> Orderlines {get;set;}
     }
 }

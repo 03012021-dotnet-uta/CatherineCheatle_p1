@@ -27,7 +27,30 @@
     </header>
 
     <section class = "main-signup">
-        <h2>Signup</h2>
+        <div class="form-wrapper">
+            <header class="form-head">
+                <h2>Signup</h2>
+            </header>
+            <form id="signin-form" method="POST">
+                <div class="fName-form">
+                    <label for="text">First Name: </label>
+                    <input type = "text" name="fName" required>
+                </div>
+                <div class="lName-form">
+                    <label for="text">Last Name: </label>
+                    <input type = "text" name="lName" required>
+                </div>
+                <div class="email-form">
+                    <label for="email">Email: </label>
+                    <input type = "email" name="email" required>
+                </div>
+                <div class="password-form">
+                    <label for="password">Password: </label>
+                    <input type = "password" name="password" required>
+                </div>
+                <button type="submit" value="Send">Submit</button>
+            </form>
+        </div>
     </section>
 
     <footer class="company-footer">
