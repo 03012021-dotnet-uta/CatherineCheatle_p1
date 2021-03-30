@@ -10,13 +10,12 @@ loginForm.addEventListener('submit', (event)=> {
     console.log("Submit button pressed");
     //create string[] to send to API
     const loginData = {
-        CustomerEmail: loginForm.email.value.trim(),
-        CustomerPassword: loginForm.password.value.trim()
+      CustomerEmail: loginForm.email.value.trim(),
+      //CustomerPasswordSalt: loginForm.password.value
     }
     console.log(loginData);
-    console.log("Customer email: " + loginData.CustomerEmail);
 
-    fetch('api/customer', {
+    fetch('api/customer/login', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -32,7 +31,15 @@ loginForm.addEventListener('submit', (event)=> {
             return response.json();
         })
         .then((jsonResponse) => {
-            loginReponse.textContent = jsonResponse.customerEmail + ' login successful';
+            //if null say username or password incorrect
+            if(jsonResponse == null)
+            {
+              loginReponse.textContent = "Sorry but either your username or password is incorrect. Try again, or sign up";
+            }
+            //else sign in 
+            else{
+              loginReponse.textContent = jsonResponse.customerEmail + ' login successful';
+            }
           console.log(jsonResponse);
         }
         )

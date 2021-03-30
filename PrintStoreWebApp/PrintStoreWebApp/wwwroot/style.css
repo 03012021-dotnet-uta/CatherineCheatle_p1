@@ -127,8 +127,9 @@ footer {
   align-items: center;
 }
 
-/*Login section*/
-#main-login {
+/*Login and Signup section*/
+#main-login,
+#main-signup {
   min-height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.7), transparent);
   background-size: cover;
@@ -136,7 +137,14 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   flex-direction: column;
+}
+.main-signup{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding: 2rem;
 }
 
 .form-wrapper {
@@ -144,28 +152,40 @@ footer {
   width: 60%;
   color: white;
   border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .form-head {
   text-align: center;
   padding: 4rem;
 }
 .password-form,
-.email-form {
+.email-form,
+.fName-form,
+.lName-form {
   padding: 3rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
 }
+
 .form-wrapper label {
-  margin: 0rem 3rem;
+  padding: 2px;
 }
 .form-wrapper button {
   width: 100%;
   padding: 2rem;
-  margin-top: 8rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
 }
 .form-wrapper input {
   padding: 1rem 3rem;
+  width: 30rem;
 }
 .form-reponse {
   padding-top: 2rem;

@@ -2,18 +2,20 @@ using System;
 using System.Collections.Generic;
 using BusinessLogic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Models;
 
 namespace PrintStoreWebApp.Controllers
 {
-    [ApiController]
+
     [Route("api/[controller]")]
-    public class CustomerController
+    [ApiController]
+    public class CustomerController : ControllerBase
     {
-        private readonly UserMethods business;
+        private readonly UserMethods _business;
         public CustomerController(UserMethods business)
         {
-            this.business = business;
+            _business = business;
         }
 
         //GET: api/CustomerController
@@ -31,7 +33,7 @@ namespace PrintStoreWebApp.Controllers
         }
 
         // POST api/<CustomerController>
-        [HttpPost]
+        [HttpPost("login")]
         // [Route("/postrequest")]
         public Customer Post([FromBody] Customer obj)
         {
@@ -39,9 +41,33 @@ namespace PrintStoreWebApp.Controllers
             //call a method in the business logic layer.
             //the business logic layer implements business requirements. Thisi s where the majority of 
             // the data manipulation will be.
-            Customer obj1 = business.Login(obj);
+            Customer obj1 = _business.Login(obj);
 
             return obj1;
+        }
+
+        [HttpPost("register")]
+        public ActionResult<Customer> Register(RawCustomer rawcustomer)
+        {
+            Customer customer = new Customer();
+            if (!ModelState.IsValid)// did the conversion from JS to C# work?
+            {
+                return StatusCode(400, "That was a failue of modelbinding");
+            }
+            else
+            {
+                Console.WriteLine($"{rawcustomer.CustomerFName}, {rawcustomer.CustomerLName}");
+                System.Console.WriteLine("Made it to Controller with raw customer " + rawcustomer.CustomerFName);
+                customer = _business.Register(rawcustomer);
+            }
+
+            if (customer == null)
+            {
+                return StatusCode(409, "We're sorry, your new user was not successfully saved or a user of that username already exists.");
+            }
+
+
+            return customer;
         }
 
         // PUT api/<CustomerController>/5
