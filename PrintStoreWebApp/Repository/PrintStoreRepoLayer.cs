@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Models;
@@ -81,6 +82,38 @@ namespace Repository
         {
             var stores = _context.Stores.ToList();
             return stores;
+        }
+
+        /// <summary>
+        /// This method will query the database for a store's inventory
+        /// It should return a list of objects that will tell information
+        /// about the store, print and qty
+        /// </summary>
+        /// <param name="storeName"></param>
+        /// <returns></returns>
+        public IEnumerable<object> GetStoreInventory(string storeName)
+        {
+            Console.WriteLine("Made it to repo, querying data base");
+            // Query for a left join beween inventory and print tables
+            var query = (from i in _context.Inventories
+                         join p in _context.Prints on i.PrintId equals p.PrintID into invent
+                         from storeInventory in invent.DefaultIfEmpty()
+                         where i.Store.StoreName == storeName
+                         select new
+                         {
+                             i.StoreId,
+                             i.PrintId,
+                             i.PrintQty,
+                             PrintName = storeInventory.PrintTitle,
+                             PrintPrice = storeInventory.PrintPrice,
+                             PrintImage = storeInventory.PrintImage,
+                             PrintDescrip = storeInventory.PrintDecription,
+                             PrintArtistFName = storeInventory.ArtistFName,
+                             PrintArtistLName = storeInventory.ArtistLName
+                         }).ToList();
+
+            Console.WriteLine(query);
+            return query;
         }
     }//end of class
 }//end of namespace

@@ -23,6 +23,7 @@ registerForm.addEventListener('submit', (e) => {
     })
     .then(response => {
       if (!response.ok) {
+        registerResponse.textContent = `Sorry but is looks like this email is already taken. Try signing in or use a different email`;
         throw new Error(`Network response was not ok (${response.status})`);
       }
       else       // When the page is loaded convert it to text

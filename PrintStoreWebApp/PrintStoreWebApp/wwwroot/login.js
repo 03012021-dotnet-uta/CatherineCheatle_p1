@@ -27,7 +27,8 @@ loginForm.addEventListener('submit', (event)=> {
         )
         .then(res => {
           localStorage.setItem('person', JSON.stringify(res));
-          location = 'menu.html';
+          //set 2 sec time delay before moving on to next page
+          location = 'menu.html';          
         })
         .catch(function(err) {  
             console.log('Failed to fetch page: ', err);  

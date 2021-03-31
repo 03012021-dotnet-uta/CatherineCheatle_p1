@@ -115,6 +115,22 @@ namespace BusinessLogic
             return storeNames;
         }
 
+        /// <summary>
+        /// This method takes in a store name and will pass it to the
+        /// repo layer to be queried to the database. It should return a list 
+        /// of objects that give information about store, print and qty
+        /// </summary>
+        /// <param name="storeName"></param>
+        /// <returns>List<Object></returns>
+        public IEnumerable<object> GetInventory(string storeName)
+        {
+            Console.WriteLine("Made it to business layer, calling repo method");
+            //call method in repo layer to query database
+            var storeInventory = _repolayer.GetStoreInventory(storeName);
+
+            return storeInventory;
+        }
+
 
     }
 }

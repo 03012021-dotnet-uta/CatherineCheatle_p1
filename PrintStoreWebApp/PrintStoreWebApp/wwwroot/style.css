@@ -171,7 +171,9 @@ footer {
   flex-direction: column;
   flex-wrap: nowrap;
 }
-
+.form-wrapper p{
+  font-weight: bold;
+}
 .form-wrapper label {
   padding: 2px;
 }

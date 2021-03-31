@@ -22,7 +22,19 @@ function myFunction() {
     function storeClick(event)
     {
         var x = event.target;
-        alert(x.textContent);
+        const storename = x.textContent.trim();
+        alert(storename);
+
+        //fetch inventory
+        fetch(`api/inventory/storeInventory/${storename}`)
+          .then(response => response.json())
+          .then(data => {
+              console.log(data); 
+              console.log(data[0].printArtistFName);     
+          })
+          .catch(function(err) {  
+              console.log('Failed to fetch page: ', err);  
+          });
     }
   }
 
