@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Models;
 
@@ -18,7 +19,6 @@ namespace Repository
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-
         public Customer Login(Customer user)
         {
             //use the context to call on the database to query for user 
@@ -61,11 +61,26 @@ namespace Repository
             return _context.Customers.FirstOrDefault(p => p.CustomerId == newCustomer.CustomerId);// default is null
         }
 
+        /// <summary>
+        /// This method will query the database with username to 
+        /// retrieve customer 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         public Customer GetCustomerByUsername(string username)
         {
             Customer existingCustomer = _context.Customers.FirstOrDefault(c => c.CustomerEmail == username);
             return existingCustomer;
         }
-        
+
+        /// <summary>
+        /// This method will query the database for list of stores
+        /// </summary>
+        /// <returns>Stores</returns>
+        public IEnumerable<Store> GetStores()
+        {
+            var stores = _context.Stores.ToList();
+            return stores;
+        }
     }//end of class
 }//end of namespace

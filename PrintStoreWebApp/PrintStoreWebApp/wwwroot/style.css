@@ -140,7 +140,7 @@ footer {
   text-align: center;
   flex-direction: column;
 }
-.main-signup{
+.main-signup {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -193,15 +193,69 @@ footer {
 }
 
 /*Menu Section*/
+.main-menu {
+  background: lightblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+#browse-header {
+  margin: 3rem 3rem;
+}
+.dropbtn {
+  padding: 16px;
+  font-size: 16px;
+  margin-left: 3rem;
+}
+.dropbtn:hover,
+.dropbtn:focus {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 176, 155, 0.5),
+    rgba(150, 201, 61, 1)
+  );
+}
+.dropdown {
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  left: 0;
+  margin: auto;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  color: black;
+  padding: 1rem 1rem;
+  font-size: 2rem;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+.show {display:block;}
+
 .wrapper {
   display: flex;
   width: 70%;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 .card {
   width: 28rem;
   height: 36rem;
   padding: 2rem 1rem;
+  margin-bottom: 3rem;
   background: white;
   position: relative;
   display: flex;

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Models;
 using Repository;
 
@@ -94,6 +95,24 @@ namespace BusinessLogic
                 Customer registeredCustomer = _repolayer.Register(newCustomer);
                 return registeredCustomer;
             }
+        }
+
+        /// <summary>
+        /// This method will call a method in the repo layer, to query
+        /// the database and will loop through the stores and return 
+        /// only the names of the stores
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetStores()
+        {
+            var storeNames = new List<string>();
+            var storeList = _repolayer.GetStores();
+            foreach (Store s in storeList)
+            {
+                storeNames.Add(s.StoreName);
+            }
+
+            return storeNames;
         }
 
 
