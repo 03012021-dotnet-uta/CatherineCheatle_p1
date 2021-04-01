@@ -44,7 +44,6 @@ namespace CustomerController
                 return StatusCode(409, "We're sorry, your new user was not successfully saved or a user of that username already exists.");
             }
 
-
             return customer;
         }
 

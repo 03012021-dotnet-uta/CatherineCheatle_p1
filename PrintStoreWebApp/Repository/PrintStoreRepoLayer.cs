@@ -149,11 +149,31 @@ namespace Repository
                             PrintDecription = storeInventory.PrintDecription,
                             PrintQty = i.PrintQty,
                             StoreId = i.StoreId,
+                            StoreName = i.Store.StoreName,
                             PrintPrice = storeInventory.PrintPrice,
                             PrintImage = storeInventory.PrintImage,
                          }).ToList();
 
             return query;
+        }
+
+        /// <summary>
+        /// Repo method that will get the inventory of a print from
+        /// a store
+        /// </summary>
+        /// <param name="storeID"></param>
+        /// <param name="printID"></param>
+        /// <returns></returns>
+        public Inventory GetInventoryByStoreAndPrintID(int storeID, int printID)
+        {
+            Inventory foundInventory = _context.Inventories
+                                        .Where(i => i.StoreId == storeID && i.PrintId ==printID).FirstOrDefault();
+            return foundInventory;
+        }
+
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
         }
     }//end of class
 }//end of namespace

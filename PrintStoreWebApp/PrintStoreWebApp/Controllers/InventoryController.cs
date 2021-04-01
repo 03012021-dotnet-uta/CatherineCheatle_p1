@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using BusinessLogic;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 
 namespace PrintStoreWebApp.Controllers
 {
@@ -71,6 +72,32 @@ namespace PrintStoreWebApp.Controllers
                 numOfPrintsAvailable = _business.GetPrintQuantity(storename, printname);
                 return numOfPrintsAvailable;
             }
+        }
+
+        /// <summary>
+        /// Controller Route to take in a store name and print name to decrease inventory for that
+        /// store and print
+        /// </summary>
+        /// <param name="storename"></param>
+        /// <param name="printname"></param>
+        /// <returns></returns>
+        [HttpPost("decreaseInventory")]
+        public ActionResult<bool> DecreaseInventory([FromBody] EditInventory editInventory)
+        {
+            bool wasSuccessful = false;
+
+            //if storename or printname is empty
+            if (!ModelState.IsValid)// did the conversion from JS to C# work?
+            {
+                return StatusCode(400, "That was a failue of modelbinding");
+            }
+            else{
+                // make call to business layer
+                wasSuccessful= _business.DecreaseInventory(editInventory);
+            }
+
+            return wasSuccessful;
+            
         }
 
         

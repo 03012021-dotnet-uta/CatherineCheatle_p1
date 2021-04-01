@@ -10,6 +10,7 @@ namespace Models
         public string PrintImage { get; set; }
         public string PrintDecription { get; set; }
         public int StoreId { get; set; }
+        public string StoreName { get; set; }
         public int PrintQty { get; set; }
 
     }

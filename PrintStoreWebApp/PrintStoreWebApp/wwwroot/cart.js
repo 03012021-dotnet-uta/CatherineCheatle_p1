@@ -180,6 +180,12 @@ function CalculateTotals() {
     let cartTotal = cartSubtotal + cartTax + cartShipping;
     let userTotal = document.getElementById("cart-grand-total");
     userTotal.textContent = cartTotal;
+
+    localStorage.setItem('salesTaxRate', TAX);
+    localStorage.setItem('subtotal', cartSubtotal);
+    localStorage.setItem('tax', cartTax);
+    localStorage.setItem('shipping', cartShipping);
+    localStorage.setItem('total', cartTotal);
 }
 
 // 

@@ -159,6 +159,26 @@ namespace BusinessLogic
             return printDetail;
         }
 
+        /// <summary>
+        /// Method that get inventory from store and print id to update the
+        /// database to decrease the inventory
+        /// </summary>
+        /// <param name="storename"></param>
+        /// <param name="printname"></param>
+        public bool DecreaseInventory(EditInventory editInventory)
+        {
+            Inventory dbInventory = _repolayer.GetInventoryByStoreAndPrintID(editInventory.StoreID, editInventory.PrintID);
+
+            if(dbInventory == null)
+            {
+                return false;
+            }
+
+            dbInventory.PrintQty = dbInventory.PrintQty - editInventory.PurchaseQty;
+            _repolayer.SaveChanges();
+            return true;
+        }
+
 
     }
 }
