@@ -1,6 +1,6 @@
 // Get Cart Div
 const cart = document.querySelector(".cart"); 
-const cartTotal = document.querySelector(".cart-total");
+const cartTotal = document.getElementById("cart-total");
 
 // Get items that are stored in local storage, if any
 // Otherwise, convert the localStorage string to an array
@@ -14,8 +14,6 @@ console.log(printCart);
 if(printCart.length <= 0)
 {
     cart.innerHTML = "<p>Your cart is empty. Why not take a look around?</p>";
-    cartTotal.style.display = 'none';
-
 }
 else{
     //Query the database for more details about the items in cart
@@ -24,6 +22,7 @@ else{
         CreateCartItem(printItem, cartCounter);
         cartCounter++;
     });
+    cartTotal.style.display = 'block';
 }
 
 function CreateCartItem(data, cartItemNum)
@@ -126,6 +125,8 @@ function delClick(cartItemNum)
     if (printCart.length ==  0)
     {
         localStorage.removeItem('printsInCart');
+        cart.innerHTML = "<p>Your cart is empty. Why not take a look around?</p>";
+        cartTotal.style.display = 'none';
 
     }
     else{

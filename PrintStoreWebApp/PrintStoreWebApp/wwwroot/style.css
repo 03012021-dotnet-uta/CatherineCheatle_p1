@@ -357,6 +357,7 @@ footer {
   align-items: center;
   width: 100%;
   background-color: cyan;
+  margin-bottom: 3rem;
 }
 .cart-item .buttons {
   width: 10%;
@@ -395,4 +396,7 @@ footer {
 .cart-item-total-price {
   width: 10%;
   font-size: large;
+}
+#cart-total {
+  display: none;
 }
