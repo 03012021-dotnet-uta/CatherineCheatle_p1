@@ -115,5 +115,45 @@ namespace Repository
             Console.WriteLine(query);
             return query;
         }
+
+        /// <summary>
+        /// In the repolayer, the input will be used to make a query to the database
+        /// and return the number of prints available
+        /// </summary>
+        /// <param name="storename"></param>
+        /// <param name="printname"></param>
+        /// <returns>int (number of available prints)</returns>
+        public int GetPrintQuantity(string storename, string printname)
+        {
+            var query = _context.Inventories
+                        .Where(q => q.Store.StoreName == storename && q.Print.PrintTitle ==printname).FirstOrDefault();
+            
+            var printQuantity = query.PrintQty;
+
+            return printQuantity;
+        }
+
+        public IEnumerable<object> GetPrintInfo(string storename, string printname)
+        {
+            // Query for a left join beween inventory and print tables
+            var query = (from i in _context.Inventories
+                         join p in _context.Prints on i.PrintId equals p.PrintID into invent
+                         from storeInventory in invent.DefaultIfEmpty()
+                         where i.Store.StoreName == storename && i.Print.PrintTitle == printname
+                         select new PrintDetail
+                         {
+                            PrintID = i.PrintId,
+                            PrintTitle = storeInventory.PrintTitle,
+                            ArtistFName = storeInventory.ArtistFName,
+                            ArtistLName = storeInventory.ArtistLName,
+                            PrintDecription = storeInventory.PrintDecription,
+                            PrintQty = i.PrintQty,
+                            StoreId = i.StoreId,
+                            PrintPrice = storeInventory.PrintPrice,
+                            PrintImage = storeInventory.PrintImage,
+                         }).ToList();
+
+            return query;
+        }
     }//end of class
 }//end of namespace

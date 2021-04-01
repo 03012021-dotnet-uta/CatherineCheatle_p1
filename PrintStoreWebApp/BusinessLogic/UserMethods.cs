@@ -131,6 +131,34 @@ namespace BusinessLogic
             return storeInventory;
         }
 
+        /// <summary>
+        /// In the business layer, the input will be passed to repolayer
+        /// to query the database to return number of prints available in the store
+        /// </summary>
+        /// <param name="storename"></param>
+        /// <param name="printname"></param>
+        /// <returns>int (number of available prints)</returns>
+        public int GetPrintQuantity(string storename, string printname)
+        {
+            //call repolayer to query the database
+            var printQuantity = _repolayer.GetPrintQuantity(storename, printname);
+            return printQuantity;
+        }
+
+        /// <summary>
+        /// Sends input to repo layer store and print name to query the database for
+        /// details about the print, store id, and inventory qty  
+        /// /// </summary>
+        /// <param name="storename"></param>
+        /// <param name="printname"></param>
+        /// <returns>Print detail object</returns>
+        public IEnumerable<object> GetPrintInfo(string storename, string printname)
+        {
+            var printDetail = _repolayer.GetPrintInfo(storename, printname);
+
+            return printDetail;
+        }
+
 
     }
 }

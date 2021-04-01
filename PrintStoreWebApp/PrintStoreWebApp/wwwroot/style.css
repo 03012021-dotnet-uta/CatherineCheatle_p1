@@ -93,6 +93,7 @@ footer {
   background-color: #281c3c;
   color: white;
   padding-bottom: 1rem;
+  margin-top: 3rem;
 }
 .footer-container {
   width: 90%;
@@ -171,7 +172,7 @@ footer {
   flex-direction: column;
   flex-wrap: nowrap;
 }
-.form-wrapper p{
+.form-wrapper p {
   font-weight: bold;
 }
 .form-wrapper label {
@@ -245,7 +246,9 @@ footer {
 .dropdown-content a:hover {
   background-color: #ddd;
 }
-.show {display:block;}
+.show {
+  display: block;
+}
 
 .wrapper {
   display: flex;
@@ -330,4 +333,66 @@ footer {
 }
 .card .info .btn:hover {
   box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.7);
+}
+
+/*Cart Section*/
+.main-cart {
+  display: flex;
+  flex-direction: column;
+}
+.cart {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  background-color: coral;
+  margin-top: 4rem;
+}
+.cart-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  background-color: cyan;
+}
+.cart-item .buttons {
+  width: 10%;
+}
+.cart-item .buttons .del-btn {
+  background-color: transparent;
+}
+.cart-item-image {
+  width: 20%;
+  background-color: darkred;
+}
+.cart-item-image img {
+  width: 100%;
+  object-fit: fill;
+}
+.cart-item-description {
+  width: 30%;
+}
+.cart-item-quantity {
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.cart-item-quantity .plus-btn,
+.minus-btn {
+  background-color: transparent;
+  padding: 1rem 1rem;
+}
+.cart-item-quantity input {
+  width: 10rem;
+  height: 3rem;
+  text-align: right;
+}
+.cart-item-total-price {
+  width: 10%;
+  font-size: large;
 }

@@ -49,6 +49,30 @@ namespace PrintStoreWebApp.Controllers
             
         }
 
+        /// <summary>
+        /// Controller Route that will take input and pass request to query the database to 
+        /// get the number of prints left in the store's inventory
+        /// </summary>
+        /// <param name="storename"></param>
+        /// <param name="printname"></param>
+        /// <returns>int (number of available prints)</returns>
+        [HttpGet("storePrintAvailability/{storename}/{printname}")]
+        public ActionResult<int> GetPrintAvailability(string storename, string printname)
+        {
+            var numOfPrintsAvailable = 0;
+
+            // if storename or printname is empty, return error
+            if(String.IsNullOrEmpty(storename) || String.IsNullOrEmpty(printname))
+            {
+                return StatusCode(422, "store name or print name is empty");
+            }
+            else{
+                //Make a call to business layer to query db
+                numOfPrintsAvailable = _business.GetPrintQuantity(storename, printname);
+                return numOfPrintsAvailable;
+            }
+        }
+
         
     }
 }
