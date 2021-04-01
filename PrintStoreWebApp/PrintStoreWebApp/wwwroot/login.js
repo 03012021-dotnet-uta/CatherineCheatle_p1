@@ -13,7 +13,8 @@ loginForm.addEventListener('submit', (event)=> {
 
     fetch(`api/customer/login/${CustomerEmail}/${CustomerPassword}`)
         .then(response => {
-          if (!response.ok) {
+            if (!response.ok) {
+            loginReponse.textContent = `Couldnt login, password or email is incorrect.`;
             throw new Error(`Network response was not ok (${response.status})`);
           }
           else       // When the page is loaded convert it to text
@@ -31,6 +32,6 @@ loginForm.addEventListener('submit', (event)=> {
           location = 'menu.html';          
         })
         .catch(function(err) {  
-            console.log('Failed to fetch page: ', err);  
+            console.log('Failed to fetch page: ', err); 
         });
 })

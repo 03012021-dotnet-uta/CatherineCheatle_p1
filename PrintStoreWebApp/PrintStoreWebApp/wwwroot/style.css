@@ -339,6 +339,8 @@ footer {
 .main-cart {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .cart {
   display: flex;
@@ -379,7 +381,7 @@ footer {
 .cart-item-quantity {
   width: 20%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -397,6 +399,26 @@ footer {
   width: 10%;
   font-size: large;
 }
-#cart-total {
-  display: none;
+.cart-total {
+  display: flex;
+  flex-direction: column;
+  background-color: cyan;
+}
+.totals-item {
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+  background-color: burlywood;
+}
+.totals-item label {
+  margin-right: 1rem;
+}
+.totals-item .totals-value {
+  font-size: medium;
+}
+.totals-item .totals-value::before {
+  content: "$";
 }
