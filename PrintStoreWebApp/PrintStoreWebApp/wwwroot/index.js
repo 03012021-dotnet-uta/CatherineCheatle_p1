@@ -14,6 +14,8 @@ const login = document.getElementById('login-btn');
 const person = localStorage.getItem('person');
 signOut.addEventListener('click', (e) => {
     localStorage.removeItem('person');
+    localStorage.clear();
+    location="index.html";
   })
 if(person == null)
 {
