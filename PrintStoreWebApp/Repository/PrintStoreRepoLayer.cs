@@ -63,6 +63,32 @@ namespace Repository
         }
 
         /// <summary>
+        /// Method will take order and add it to the database and return
+        /// that placed order
+        /// </summary>
+        /// <param name="newOrder"></param>
+        /// <returns></returns>
+        public Order PlaceOrder(Order newOrder)
+        {
+            System.Console.WriteLine("Order creation in repolayer");
+            var placedOrder = _context.Orders.Add(newOrder);
+            _context.SaveChanges();
+            return _context.Orders.FirstOrDefault(o => o.OrdersId == newOrder.OrdersId);
+        }
+
+        /// <summary>
+        /// This method will add orderline to database
+        /// </summary>
+        /// <param name="orderline"></param>
+        /// <returns></returns>
+        public Orderline AddOrderline(Orderline orderline)
+        {
+            var addedOrderline = _context.Orderline.Add(orderline);
+            _context.SaveChanges();
+            return _context.Orderline.FirstOrDefault(ol => ol.OrderNumId == orderline.OrderNumId && ol.PrintId == orderline.PrintId);
+        }
+
+        /// <summary>
         /// This method will query the database with username to 
         /// retrieve customer 
         /// </summary>

@@ -1,3 +1,19 @@
+const signUp = document.getElementById('signup-btn');
+const signOut = document.getElementById('signout-btn');
+const person = localStorage.getItem('person');
+signOut.addEventListener('click', (e) => {
+    localStorage.removeItem('person');
+  })
+if(person == null)
+{
+    signUp.style.display = 'block';
+    signOut.style.display = 'none';
+}
+else{
+    signUp.style.display = 'none';
+    signOut.style.display = 'block';
+}
+
 // Get Cart Div
 let cart = document.querySelector(".cart"); 
 let cartTotal = document.querySelector(".cart-total");

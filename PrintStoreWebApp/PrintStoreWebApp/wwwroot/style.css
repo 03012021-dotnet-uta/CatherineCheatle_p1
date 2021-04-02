@@ -68,6 +68,9 @@ nav ul {
 #logo {
   flex: 2 1 40rem;
 }
+#signout-btn {
+  display:none;
+}
 
 /*Landing Page Main Body Section*/
 .main-info {
@@ -93,7 +96,6 @@ footer {
   background-color: #281c3c;
   color: white;
   padding-bottom: 1rem;
-  margin-top: 3rem;
 }
 .footer-container {
   width: 90%;
@@ -132,7 +134,7 @@ footer {
 #main-login,
 #main-signup {
   min-height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.7), transparent);
+  background: linear-gradient(rgba(28, 37, 60, 0.7), rgba(40, 28, 60, 0.5));
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;
@@ -141,7 +143,7 @@ footer {
   text-align: center;
   flex-direction: column;
 }
-.main-signup {
+#main-signup {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -202,7 +204,7 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 3rem;
+  background: linear-gradient(rgba(28, 37, 60, 0.7), rgba(40, 28, 60, 0.5));
   position: relative;
 }
 #browse-header {
@@ -341,6 +343,7 @@ footer {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(rgba(28, 37, 60, 0.7), rgba(40, 28, 60, 0.5));
 }
 .cart {
   display: flex;
@@ -349,8 +352,8 @@ footer {
   margin: auto;
   justify-content: center;
   align-items: center;
-  background-color: coral;
   margin-top: 4rem;
+  border: solid 1px black;
 }
 .cart-item {
   display: flex;
@@ -358,7 +361,6 @@ footer {
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
-  background-color: cyan;
   margin-bottom: 3rem;
 }
 .cart-item .buttons {
@@ -369,7 +371,6 @@ footer {
 }
 .cart-item-image {
   width: 20%;
-  background-color: darkred;
 }
 .cart-item-image img {
   width: 100%;
@@ -402,7 +403,6 @@ footer {
 .cart-total {
   display: flex;
   flex-direction: column;
-  background-color: cyan;
 }
 .totals-item {
   padding: 1rem;
@@ -411,7 +411,6 @@ footer {
   align-items: center;
   justify-content: center;
   margin: 1rem;
-  background-color: burlywood;
 }
 .totals-item label {
   margin-right: 1rem;
@@ -424,7 +423,12 @@ footer {
 }
 
 /* Checkout form */
+#checkout-heading {
+  background: linear-gradient(rgba(28, 37, 60, 0.7), rgba(40, 28, 60, 0.5));
+  color: white;
+}
 .row {
+  background: linear-gradient(rgba(28, 37, 60, 0.7), rgba(40, 28, 60, 0.5));
   display: -ms-flexbox; /* IE10 */
   display: flex;
   -ms-flex-wrap: wrap; /* IE10 */
@@ -433,8 +437,8 @@ footer {
 }
 
 .col-25 {
-  -ms-flex: 25%; /* IE10 */
-  flex: 25%;
+  -ms-flex: 50%; /* IE10 */
+  flex: 50%;
 }
 
 .col-50 {
@@ -443,8 +447,8 @@ footer {
 }
 
 .col-75 {
-  -ms-flex: 75%; /* IE10 */
-  flex: 75%;
+  -ms-flex: 50%; /* IE10 */
+  flex: 50%;
 }
 
 .col-25,
@@ -467,7 +471,7 @@ p {
 }
 
 input[type="text"],
-input[type="email"] {
+input[type="tel"] {
   width: 100%;
   margin-bottom: 20px;
   padding: 12px;
@@ -488,7 +492,11 @@ label {
 }
 
 .btn {
-  background-color: #4caf50;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 176, 155, 0.5),
+    rgba(150, 201, 61, 1)
+  );
   color: white;
   padding: 12px;
   margin: 10px 0;

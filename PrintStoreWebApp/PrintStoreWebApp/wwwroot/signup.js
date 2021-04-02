@@ -31,15 +31,13 @@ registerForm.addEventListener('submit', (e) => {
     })
     .then((jsonResponse) => {
       registerResponse.textContent = ` Welcome, ${jsonResponse.fname} ${jsonResponse.lname}`;
-      console.log(jsonResponse);
       return jsonResponse;
     })
     .then(res => {
       //save the personId to localStorage
-      localStorage.setItem('personId', res.customerId);// this is available to the whole browser
-      sessionStorage.setItem('personId', res.customerId);// this is ony vailable to the certain window tab.
+      localStorage.setItem('person', res.customerId);// this is available to the whole browser
       //switch the screen
-      location = 'index.html';// 
+      location = 'index.html';
     })
     .catch(function(err) {  
         console.log('Failed to fetch page: ', err);  

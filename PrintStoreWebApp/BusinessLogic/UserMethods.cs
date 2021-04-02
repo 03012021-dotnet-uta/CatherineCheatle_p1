@@ -98,6 +98,36 @@ namespace BusinessLogic
         }
 
         /// <summary>
+        /// This method will convert raw order to an order then pass it to the 
+        /// repolayer to be saved to the database
+        /// </summary>
+        /// <param name="raworder"></param>
+        /// <returns></returns>
+        public Order PlaceOrder(RawOrder raworder)
+        {
+            // check if the customer already placed an order within 24 hours
+            Console.WriteLine(raworder.OrderSubtotal);
+            // create new order
+            Console.WriteLine("Create an order");
+
+            Order newOrder = new Order {
+                OrderDate = DateTime.Parse(raworder.OrderDate),
+                OrderDeliveryDate = DateTime.Parse(raworder.OrderDeliveryDate),
+                OrderSubtotal = raworder.OrderSubtotal,
+                OrderTax = Double.Parse(raworder.OrderTax),
+                OrderTotalPrice = Double.Parse(raworder.OrderTotalPrice),
+                CustomerId = raworder.CustomerId,
+                StoreId = raworder.StoreId,
+            };
+
+            
+            // Send this order to the repo layer to add to the database
+            Order placedOrder = _repolayer.PlaceOrder(newOrder);
+            return placedOrder;
+
+        }
+
+        /// <summary>
         /// This method will call a method in the repo layer, to query
         /// the database and will loop through the stores and return 
         /// only the names of the stores
@@ -176,6 +206,22 @@ namespace BusinessLogic
 
             dbInventory.PrintQty = dbInventory.PrintQty - editInventory.PurchaseQty;
             _repolayer.SaveChanges();
+            return true;
+        }
+
+        public bool AddOrderline(RawOrdelines rawOrderlines)
+        {
+            Orderline newOrderline = new Orderline{
+                PrintId = rawOrderlines.PrintId,
+                OrderNumId = rawOrderlines.PrintId,
+                PrintQty = rawOrderlines.PrintQty
+            };
+
+            Orderline addedOrderline = _repolayer.AddOrderline(newOrderline);
+            if(addedOrderline == null)
+            {
+                return false;
+            }
             return true;
         }
 

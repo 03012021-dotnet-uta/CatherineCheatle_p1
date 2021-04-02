@@ -1,3 +1,19 @@
+const signUp = document.getElementById('signup-btn');
+const signOut = document.getElementById('signout-btn');
+signOut.addEventListener('click', (e) => {
+  localStorage.removeItem('person');
+})
+const person = localStorage.getItem('person');
+if(person == null)
+{
+    signUp.style.display = 'block';
+    signOut.style.display = 'none';
+}
+else{
+    signUp.style.display = 'none';
+    signOut.style.display = 'block';
+}
+
 // Get Select Store button, Store Drop Down Menu and card wrapper div
 const dropDownBtn = document.getElementsByClassName("dropbtn");
 const dropDownMenu = document.getElementById("myDropdown");
@@ -40,7 +56,6 @@ function myFunction() {
     fetch(`api/inventory/storeInventory/${storename}`)
       .then(response => response.json())
       .then(data => {
-          console.log(data); 
           data.forEach(print => {
             CreateCard(print);
           });    
@@ -130,7 +145,6 @@ function AddToCart(event) {
   fetch(`api/print/${storename}/${printname}`)
     .then(response => response.json())
     .then(data => {
-      console.log(data); 
       // if the quantity is less than zero, alert that item is unavailiable
       if(data[0].printQty <= 0)
       {
@@ -159,19 +173,5 @@ function AddToCart(event) {
       console.log('Failed to fetch page: ', err);  
     });
 }
-
-
-
-
-  //html for card
-  /*
-  <div class="card">
-                <img src="img/pinkbluepastelart.jpg" alt="brown-hawk-owl">
-                <div class="info">
-                    <h2>Art Title</h2>
-                    <p>Art print description</p>
-                    <a href="#" class="btn">Add to Cart</a>
-                </div>
-  </div>*/
 
 
