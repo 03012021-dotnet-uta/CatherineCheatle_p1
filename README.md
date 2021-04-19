@@ -10,7 +10,7 @@ This is an ASPNET Core web application which allows a user to choose a store, wh
 * .NET 5
 * C#
 * Entity Framework Core (EF)
-* Mircosoft SQL Server Database
+* Microsoft SQL Server Database
 ***
 ## Features
 * A user can sign up and login into an account
